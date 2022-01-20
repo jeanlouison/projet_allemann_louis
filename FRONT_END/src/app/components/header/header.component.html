@@ -1,0 +1,21 @@
+<header class="d-flex flex-row py-2 px-3 justify-content-around">	
+	<div>
+		<div *ngIf="(user$ | async)?.username != ''">
+			<button routerLink="/catalogue" class="btn btn-light">Boutique</button>
+		</div>
+		<div *ngIf="(user$ | async)?.username == ''">
+			<button routerLink="/" class="btn btn-light">Accueil</button>
+		</div>
+	</div>
+	<h2>Boutique projet Louis Allemann</h2>
+	<div>
+		<div *ngIf="(user$ | async)?.username != ''">
+		<button routerLink="/panier" class="btn btn-light">Panier ({{numberProductsInCart$ | async}})</button>
+		<button routerLink="/client" class="btn btn-light">Mon compte</button>        
+		</div>
+		<div *ngIf="(user$ | async)?.username == ''">
+			<button routerLink="/login" class="btn btn-light">Se connecter</button>
+			<button routerLink="/createAccount" class="btn btn-light">Créer un compte</button>
+		</div>
+	</div>
+</header>

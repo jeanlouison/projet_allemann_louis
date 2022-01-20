@@ -1,0 +1,24 @@
+<div class="d-flex flex-column p-3">
+    <form id="filters-form" [formGroup]="filterForm" (ngSubmit)="onSubmit()" class="d-flex flex-column">
+
+        <!-- Titre -->
+        <h3 class="mx-auto">Filtres</h3>
+
+        <!-- Prix -->
+        <div class="d-flex flex-column mb-3">
+            <label for="prix" class="form-label mb-0">Prix maximum</label>
+            <input type="number" name="prix" formControlName="maxPriceFilter" [max]="$filters.price" class="form-control"/>
+        </div>
+
+         <!-- Game Pass -->
+         <div class="form-check">
+            <input type="checkbox" name="gamepass" formControlName="gamepassFilter" [checked]="$filters.gamepass" class="form-check-input"/>
+            <label for="gamepass" class="form-check-label mb-0">Gratuit avec le Game Pass</label>
+        </div>
+
+        <button type="submit" id="main-form-btn" class="btn btn-primary mt-3">
+            Appliquer les filtres
+        </button>
+    </form>
+</div>
+

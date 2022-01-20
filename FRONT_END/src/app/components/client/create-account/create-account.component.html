@@ -1,0 +1,70 @@
+<div class="main-block d-flex flex-column mx-auto p-3">
+    <form id="main-form" (ngSubmit)="onSubmit()" [formGroup]="mainForm" class="main-form d-flex flex-column">
+
+        <!-- Alertes -->
+        <ul *ngIf="mainForm.invalid && (mainForm.dirty || mainForm.touched)" class="alert alert-warning">
+            <h6>Il existe des erreurs dans le formulaire :</h6>
+            
+            <li *ngIf="mainForm.controls.nom.errors?.required">
+                Le nom est obligatoire.
+            </li>
+
+            <li *ngIf="mainForm.controls.prenom.errors?.required">
+                Le prénom est obligatoire.
+            </li>
+
+            <li *ngIf="mainForm.controls.identifiant.errors?.required">
+                L'identifiant est obligatoire.
+            </li>
+
+            <li *ngIf="mainForm.controls.password.errors?.required">
+                Le mot de passe est obligatoire.
+            </li>
+
+            <li *ngIf="mainForm.controls.passwordConfirm.errors?.mustMatch">
+                Le mot de passe et la confirmation doivent être identiques.
+            </li>
+        </ul>
+
+        <!-- Titre -->
+        <h1 class="mx-auto">Créer un compte</h1>        
+        
+        <!-- Identifiant -->
+        <div class="d-flex flex-column mb-3">
+            <label for="identifiant" class="form-label mb-0">Identifiant*</label>
+            <input type="text" name="identifiant" formControlName="identifiant" class="form-control" [appValidate]="mainForm"/>
+            <div class="form-text">*Obligatoire.</div>
+        </div>
+        <!-- Nom -->
+        <div class="d-flex flex-column mb-3">
+            <label for="nom" class="form-label mb-0">Nom*</label>
+            <input type="text" name="nom" formControlName="nom" class="form-control" [appValidate]="mainForm"/>
+            <div class="form-text">*Obligatoire.</div>
+        </div>
+        <!-- Prénom -->
+        <div class="d-flex flex-column mb-3">
+            <label for="prenom" class="form-label mb-0">Prénom*</label>
+            <input type="text" name="prenom" formControlName="prenom" class="form-control" [appValidate]="mainForm"/>
+            <div class="form-text">*Obligatoire.</div>            
+        </div>
+        <!-- Mot de passe -->
+        <div class="d-flex flex-column mb-3">
+            <label for="password" class="form-label mb-0">Mot de passe*</label>
+            <input type="password" name="password" id="password" formControlName="password" class="form-control" [appValidate]="mainForm"/>
+            <div class="form-text">*Obligatoire.</div>
+        </div>
+        <!-- Confirmation du mot de passe -->
+        <div class="d-flex flex-column mb-3">
+            <label for="passwordConfirm" class="form-label mb-0">Confirmation du mot de passe*</label>
+            <input type="password" name="passwordConfirm" id="confirmpassword" formControlName="passwordConfirm" class="form-control" [appValidate]="mainForm"/>
+            <div class="form-text">*Obligatoire.</div>
+        </div>
+
+        <!-- Validation -->
+        <div class="d-flex flex-column align-items-end">
+            <button type="submit" id="main-form-btn" [disabled]="!mainForm.valid" class="btn btn-primary mt-3">
+                Valider et confirmer
+            </button>
+        </div>
+    </form>
+</div>

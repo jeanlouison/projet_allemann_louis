@@ -1,0 +1,30 @@
+<div class="d-flex flex-row">
+
+    <app-filters (filtersEmitter)="updateFilters($event)"></app-filters>
+
+    <div class="main-block mx-auto p-3">
+    <div class="main-form d-flex flex-wrap justify-content-center">
+        <div *ngFor="let p of filteredCatalog">
+            <div class="card mx-3 my-2" style="width: 12rem;">
+            <img class="card-img-top " src={{p.image}}/>
+            <div class="card-body">
+                <h4 class="card-title">{{p.libelle}}</h4>
+                <p class="card-text">
+                    <span>{{p.prix | prix}}</span>
+                    <span *ngIf="p.gamepass">
+                        <span> ou </span>
+                        <span class="badge badge-success">Game Pass</span>
+                    </span> 
+                </p>
+                <button class="btn btn-primary" (click)="addProduct(p)">
+                    Ajouter au panier
+                </button>
+                <button routerLink="/produit/{{p.ref}}" class="btn btn-light">
+                    Détails
+                </button>
+            </div>  
+            </div>
+        </div>
+    </div>
+    </div>
+</div>

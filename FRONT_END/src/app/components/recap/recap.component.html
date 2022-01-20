@@ -1,0 +1,38 @@
+<div class="block mx-auto">
+    <h2 class="mx-2 y-2">Récapitulatif</h2>
+    <table class="table .table-sm block-table">
+        <thead>
+            <tr>
+            <th>Champ</th>
+            <th>Valeur</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let control of formControls.controls | keyvalue">
+            <tr>
+                <td>{{control.key}}</td>
+                <ng-container *ngIf="isObject(formControls.get(control.key)?.value)">
+                    <td>
+                        <ul>
+                        <ng-container *ngFor="let item of formControls.get(control.key)?.value | keyvalue">
+                            <li>
+                                {{item.key}}: {{item.value}}
+                            </li>
+                        </ng-container>
+                        </ul>
+                    </td>
+                </ng-container>
+
+                <ng-container *ngIf="! isObject(formControls.get(control.key)?.value)">
+                    <td>{{formControls.get(control.key)?.value}}</td>
+                </ng-container>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Validation -->
+    <div class="d-flex flex-column align-items-end">
+        <button type="submit" id="main-form-btn" class="btn btn-primary mt-3" (click)="onSubmit()">
+            Confirmer
+        </button>
+    </div>
+</div>

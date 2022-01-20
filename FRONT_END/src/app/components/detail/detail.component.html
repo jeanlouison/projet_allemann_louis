@@ -1,0 +1,23 @@
+<div class="main-block mx-auto p-3">
+    <div class="main-form d-flex flex-wrap justify-content-center">
+        <div *ngIf="product$ != undefined">
+            <h1>{{product$.libelle}}</h1>
+            <div class="d-flex flex-row">
+                <img [src]="product$.image">
+                <div class="d-flex flex-column mx-3">
+                    <h2>{{product$.prix | prix}}</h2>
+                    <div *ngIf="product$.gamepass">
+                        <span class="badge badge-success">Game Pass</span>
+                        <p>Disponible gratuitement avec le Game Pass</p>
+                    </div>
+                    <button class="btn btn-success mx-3" (click)="addProduct(product$)">
+                        Ajouter au panier
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="product$ == undefined">
+            <h1>Produit inconnu.</h1>
+        </div>
+    </div>
+</div>

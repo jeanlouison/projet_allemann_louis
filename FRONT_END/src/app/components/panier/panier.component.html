@@ -1,0 +1,31 @@
+<div class="d-flex flex-row">
+    <div class="main-block mx-auto p-3">
+    <div class="d-flex flex-column justify-content-center">
+        <div *ngFor="let p of products$ | async">
+            <div class="card mx-3 my-2 d-flex flex-row">
+            <img class="card-img-top " src={{p.image}} style="width: 6rem"/>
+            <div class="card-body" tyle="width: 64rem;">
+                <h4 class="card-title">{{p.libelle}}</h4>
+                <p class="card-text">
+                    <span>{{p.prix | prix}}</span>
+                    <span *ngIf="p.gamepass">
+                        <span> ou </span>
+                        <span class="badge badge-success">Game Pass</span>
+                    </span> 
+                </p>
+                <button class="btn btn-primary" (click)="removeProduct(p)">
+                    Retirer du panier
+                </button>
+            </div>
+            </div>
+        </div>
+        <div *ngIf="(products$ | async)?.length == 0">
+            <h2>Votre panier est vide</h2>
+            <button routerLink="/catalogue" class="btn btn-primary">Parcourir la boutique</button>
+        </div>
+        <div *ngIf="(products$ | async)?.length != 0">
+            <button (click)="emptyCart()" class="btn btn-primary">Vider le panier</button>
+        </div>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+Product:
+    type: entity
+    table: product
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: SEQUENCE
+            column: id_product
+    fields:
+        ref:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: ref
+        libelle:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                unsigned: false
+            column: libelle
+        prix:
+            type: float
+            nullable: true
+            column: prix
+        gamepass:
+            type: boolean
+            nullable: true
+        image:
+            type: string
+            nullable: true
+            length: 300
+            options:
+                fixed: false
+            column: image
+    lifecycleCallbacks: {  }

@@ -1,0 +1,98 @@
+<div class="main-block d-flex flex-column mx-auto p-3">
+    <form id="main-form" (ngSubmit)="onSubmit()" [formGroup]="mainForm" class="main-form d-flex flex-column">
+
+        <!-- Alertes -->
+        <ul *ngIf="mainForm.invalid && (mainForm.dirty || mainForm.touched)" class="alert alert-warning">
+            <h6>Il existe des erreurs dans le formulaire :</h6>
+            
+            <li *ngIf="mainForm.controls.nom.errors?.required">
+                Le nom est obligatoire.
+            </li>
+
+            <li *ngIf="mainForm.controls.prenom.errors?.required">
+                Le prénom est obligatoire.
+            </li>
+
+            <li *ngIf="mainForm.controls.password.errors?.required">
+                Le mot de passe est obligatoire.
+            </li>
+
+            <li *ngIf="mainForm.controls.passwordConfirm.errors?.mustMatch">
+                Le mot de passe et la confirmation doivent être identiques.
+            </li>
+        </ul>
+
+        <!-- Titre -->
+        <h1 class="mx-auto">Formulaire</h1>
+
+        <!-- Nom -->
+        <div class="d-flex flex-column mb-3">
+            <label for="nom" class="form-label mb-0">Nom*</label>
+            <input type="text" name="nom" formControlName="nom" class="form-control" [appValidate]="mainForm"/>
+            <div class="form-text">*Obligatoire.</div>
+        </div>
+        <!-- Prénom -->
+        <div class="d-flex flex-column mb-3">
+            <label for="prenom" class="form-label mb-0">Prénom*</label>
+            <input type="text" name="prenom" formControlName="prenom" class="form-control" [appValidate]="mainForm"/>
+            <div class="form-text">*Obligatoire.</div>            
+        </div>
+        <!-- Adresse -->
+        <div class="d-flex flex-column mb-3">
+            <label for="adresse" class="form-label mb-0">Adresse</label>
+            <select name="adresse" formControlName="adresse" class="form-control" [appValidate]="mainForm" [(ngModel)]="selectedAdresse">
+                    <option *ngFor="let item of addresses$ | async" [ngValue]="item">{{item.adresse}}</option>
+            </select>
+            <a (click)="saveFormData()" routerLink="/adresse">Gérer les adresses</a>
+        </div>
+        <!-- Téléphone -->
+        <div class="d-flex flex-column mb-3">
+            <label for="telephone" class="form-label mb-0">Téléphone</label>
+            <input type="tel" name="telephone"
+                    [value]="mainForm.controls.telephone.value | telephone"
+                    (value)="mainForm.controls.telephone.value"
+                    formControlName="telephone" class="form-control" [appValidate]="mainForm"/>
+        </div>
+        <!-- Email -->
+        <div class="d-flex flex-column mb-3">
+            <label for="email" class="form-label mb-0">Email</label>
+            <input type="email" name="email" formControlName="email" class="form-control" [appValidate]="mainForm"/>
+        </div>
+        <!-- Civilité -->
+        <div class="d-flex flex-column mb-3">
+            <label class="form-label mb-0">Civilité</label>
+            <div class="d-flex flex-row">
+                <div>
+                    <input type="radio" name="sex" class="form-check-control" (change)="updateCivilite('M')" checked/>
+                    <label for="sex" class="form-check-label mb-0">Homme</label>
+                </div>
+                <div class="mx-2">
+                    <input type="radio" name="sex" class="form-check-control" (change)="updateCivilite('F')"/>
+                    <label for="sex" class="form-check-label mb-0">Femme</label>
+                </div>
+            </div>
+        </div>        
+        <!-- Mot de passe -->
+        <div class="d-flex flex-column mb-3">
+            <label for="password" class="form-label mb-0">Mot de passe*</label>
+            <input type="password" name="password" id="password" formControlName="password" class="form-control" [appValidate]="mainForm"/>
+            <div class="form-text">*Obligatoire.</div>
+        </div>
+        <!-- Confirmation du mot de passe -->
+        <div class="d-flex flex-column mb-3">
+            <label for="passwordConfirm" class="form-label mb-0">Confirmation du mot de passe*</label>
+            <input type="password" name="passwordConfirm" id="confirmpassword" formControlName="passwordConfirm" class="form-control" [appValidate]="mainForm"/>
+            <div class="form-text">*Obligatoire.</div>
+        </div>
+
+        <!-- Validation -->
+        <div class="d-flex flex-column align-items-end">
+            <button type="submit" id="main-form-btn" [disabled]="!mainForm.valid" class="btn btn-primary mt-3">
+                Valider
+            </button>
+        </div>
+    </form>
+</div>
+
+<app-recap *ngIf="showRecap" [formControls]="mainForm"></app-recap>
+

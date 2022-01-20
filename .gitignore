@@ -1,0 +1,8 @@
+BACK_END/vendor/
+BACK_END/composer.phar
+BACK_END/.env
+BACK_END/var/
+BACK_END/bin/
+BACK_END/docker-compose.override.yml
+BACK_END/docker-compose.yml
+FRONT_END/node_modules/
